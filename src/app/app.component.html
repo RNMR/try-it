@@ -1,0 +1,71 @@
+<!-- <main class="container">
+  <section class="sidetab">
+    <nav class="sidetab--top">
+      <img class="RP-logo" src="assets/img/logo.png" alt="">
+    </nav>
+
+    <nav class="sidetab--middle">
+
+    </nav>
+  </section>
+
+  <section class="maintab">
+
+  </section>
+</main> -->
+
+<nz-layout class="container">
+  <nz-sider nzWidth="30%" class="sidetab">
+    <nav class="sidetab--top">
+      <img class="RP-logo" src="assets/img/logo.png" alt="">
+    </nav>
+    <nav class="sidetab--middle">
+      <!-- <ul nz-menu nzMode="inline" class="sider-menu">
+        <li nz-submenu nzOpen nzTitle="Registro de Datos" nzIcon="mail">
+          <ul>
+            <li nz-menu-group >
+              <ul>
+                <li nz-menu-item nzSelected>Información General y de Contenido</li>
+                <li nz-menu-item>Información Contable y Legal</li>
+                <li nz-menu-item>Condiciones Comerciales</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li nz-menu-item nzTitle="Documentos Legales" nzIcon="mail"></li>
+        <li nz-menu-item nzTitle="Confirmación" nzIcon="mail"></li>
+      </ul> -->
+
+      <div class="menu-item active">
+        <div class="img-number"> <img src="assets/img/bullet-1.png" alt=""> </div>
+        <label>
+          Registro de Datos
+        </label>
+      </div>
+      <div class="menu-item--sub">
+        <label>Información General y de Contenido</label>
+      </div>
+      <div class="menu-item--sub">
+        <label>Información Contable y Legal</label>
+      </div>
+      <div class="menu-item--sub active">
+        <label>Condiciones Comerciales</label>
+      </div>
+
+      <div class="menu-item">
+        <div class="img-number"> <img src="assets/img/bullet-2.png" alt=""> </div>
+        <label>Documentos Legales</label>
+      </div>
+
+      <div class="menu-item">
+        <div class="img-number"> <img src="assets/img/bullet-3.png" alt=""> </div>
+        <label>Confirmación</label>
+      </div>
+    </nav>
+  </nz-sider>
+  <nz-layout class="maintab">
+    <nz-content>
+      CONTENT
+    </nz-content>
+  </nz-layout>
+</nz-layout>
