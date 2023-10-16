@@ -1,40 +1,35 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
-  "newProjectRoot": "projects",
+  "newProjectRoot": "libs",
   "projects": {
-    "try-it": {
+    "galaxy": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss"
         }
       },
-      "root": "",
-      "sourceRoot": "src",
+      "root": "apps/galaxy",
+      "sourceRoot": "apps/galaxy/src",
       "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/try-it",
-            "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "tsconfig.app.json",
+            "outputPath": "dist/galaxy",
+            "index": "apps/galaxy/src/index.html",
+            "main": "apps/galaxy/src/main.ts",
+            "polyfills": "apps/galaxy/src/polyfills.ts",
+            "tsConfig": "apps/galaxy/tsconfig.app.json",
             "aot": true,
             "assets": [
-              "src/favicon.ico",
-              "src/assets",
-              {
-                "glob": "**/*",
-                "input": "./node_modules/@ant-design/icons-angular/src/inline-svg/",
-                "output": "/assets/"
-              }
+              "apps/galaxy/src/favicon.ico",
+              "apps/galaxy/src/assets"
             ],
             "styles": [
-              "./node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
-              "src/styles.scss"
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "apps/galaxy/src/styles.scss"
             ],
             "scripts": []
           },
@@ -42,8 +37,8 @@
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "replace": "apps/galaxy/src/environments/environment.ts",
+                  "with": "apps/galaxy/src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -72,34 +67,34 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "try-it:build"
+            "browserTarget": "galaxy:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "try-it:build:production"
+              "browserTarget": "galaxy:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "try-it:build"
+            "browserTarget": "galaxy:build"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "tsconfig.spec.json",
-            "karmaConfig": "karma.conf.js",
+            "main": "apps/galaxy/src/test.ts",
+            "polyfills": "apps/galaxy/src/polyfills.ts",
+            "tsConfig": "apps/galaxy/tsconfig.spec.json",
+            "karmaConfig": "apps/galaxy/karma.conf.js",
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              "apps/galaxy/src/favicon.ico",
+              "apps/galaxy/src/assets"
             ],
             "styles": [
-              "./node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
-              "src/styles.scss"
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "apps/galaxy/src/styles.scss"
             ],
             "scripts": []
           }
@@ -108,9 +103,9 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "tsconfig.app.json",
-              "tsconfig.spec.json",
-              "e2e/tsconfig.json"
+              "apps/galaxy/tsconfig.app.json",
+              "apps/galaxy/tsconfig.spec.json",
+              "apps/galaxy/e2e/tsconfig.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -120,17 +115,60 @@
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
-            "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "try-it:serve"
+            "protractorConfig": "apps/galaxy/e2e/protractor.conf.js",
+            "devServerTarget": "galaxy:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "try-it:serve:production"
+              "devServerTarget": "galaxy:serve:production"
             }
+          }
+        }
+      }
+    },
+    "galaxy-commons": {
+      "projectType": "library",
+      "root": "libs/galaxy-commons",
+      "sourceRoot": "libs/galaxy-commons/src",
+      "prefix": "glx",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/galaxy-commons/tsconfig.lib.json",
+            "project": "libs/galaxy-commons/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/galaxy-commons/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/galaxy-commons/src/test.ts",
+            "tsConfig": "libs/galaxy-commons/tsconfig.spec.json",
+            "karmaConfig": "libs/galaxy-commons/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/galaxy-commons/tsconfig.lib.json",
+              "libs/galaxy-commons/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }
     }
   },
-  "defaultProject": "try-it"
+  "defaultProject": "galaxy",
+  "cli": {
+    "analytics": false
+  }
 }
